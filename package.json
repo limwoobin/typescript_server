@@ -15,9 +15,10 @@
     "url": "https://github.com/limwoobin/zizonServer"
   },
   "scripts": {
-    "start": "node ./src/server.js",
+    "start": "node ./build/server.js",
     "dev": "nodemon ./src/server.js --exec babel-node",
     "build": "babel src -d build --presets=es2015",
+    "tsBuild": "tsc -p .",
     "development": "node ./scripts/development.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "estest": "babel-node ./src/test.js"
