@@ -1,28 +1,6 @@
+const a = 'test';
 
-function excution(){
-    console.log('111');
-    setTimeout(() => {
-        console.log('excution');
-    } , 0);
-    console.log('222');
-}
+console.log(a);
 
-function A(){
-    console.log('A');
-    excution();
-}
+console.log(a.length);
 
-function B(){
-    console.log('B');
-    A();
-}
-
-function C(){
-    console.log('C');
-    B();
-}
-
-
-
-C();
-// excution();

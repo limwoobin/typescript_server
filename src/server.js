@@ -41,8 +41,11 @@ app.all('/*' , (req , res , next) => {
 }); // cors 허용
 
 app.use(setting);
-app.use(history()); // client와 연결
-app.use('/' , express.static(__dirname + "/../../typescript_web/build"));
+// app.use(history()); // client와 연결
+// app.use('/' , express.static(__dirname + "/../../typescript_web/build"));
+app.get('/' , (req , res) => {
+    return res.json('drogbalog api server')
+});
 // 훅스버전
 
 app.use(bodyParser.json());

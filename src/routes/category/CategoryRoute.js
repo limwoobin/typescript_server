@@ -6,11 +6,12 @@ const logger = require('../../config/winston');
 
 router.get('/list' , async (req , res) => {
     logger.info('category...');
+    const type = req.query.type;
     const result = common.result;
     result.code = 'DR00';
     result.message = common.status.DR00;
     try {
-        const categories = await CategoryService.getCategories();
+        const categories = await CategoryService.getCategories(type);
         result.data = categories;
     } catch (error) {
         result.code = 'DR01';
