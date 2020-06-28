@@ -11,6 +11,7 @@
         "charset": "utf8",
         "allowJs": false,
         "strict": true,
+        "watch": true
     },
     "include": [
         "src/**/*"
