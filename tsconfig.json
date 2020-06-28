@@ -11,7 +11,10 @@
         "charset": "utf8",
         "allowJs": false,
         "strict": true,
-        "watch": true
+        "watch": true,
+        "lib": [
+            "ES2015"
+        ]
     },
     "include": [
         "src/**/*"
