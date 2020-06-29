@@ -1,13 +1,13 @@
-import Category from '../../models/category';
+import CategoryModel from '../../models/category';
 
 const CategoryService = {};
 
 CategoryService.getCategories = (type) => {
     if(type !== undefined) {
-        return Category.find()
+        return CategoryModel.find()
                     .where('type').equals(type);
     }
-    return Category.find();
+    return CategoryModel.find();
 }
 
 module.exports = CategoryService;
