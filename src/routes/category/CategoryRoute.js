@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const CategoryService = require('./CategoryService');
+// const CategoryService = require('./CategoryService.js');
+import CategoryService from './CategoryService';
 const common = require('../../common/common');
 const logger = require('../../config/winston');
 
@@ -11,7 +12,9 @@ router.get('/list' , async (req , res) => {
     result.code = 'DR00';
     result.message = common.status.DR00;
     try {
-        const categories = await CategoryService.getCategories(type);
+        // const ctgService = new CategoryService();
+        // categories = ctgService.getCategories();
+        const categories = await CategoryService.getCategories();
         result.data = categories;
     } catch (error) {
         result.code = 'DR01';
