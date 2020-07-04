@@ -36,39 +36,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var express = require("express");
-var router = express.Router();
-var CategoryService_1 = require("./CategoryService");
-var common = require('../../common/common');
-var logger = require('../../config/winston');
-router.get('/list', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var type, result, categoryService, categories, err_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                logger.info('category...');
-                type = req.query.type || undefined;
-                logger.info('type:' + type);
-                result = common.result;
-                result.code = 'DR00';
-                result.message = common.status.DR00;
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                categoryService = new CategoryService_1["default"]();
-                return [4 /*yield*/, categoryService.getCategories(type)];
-            case 2:
-                categories = _a.sent();
-                result.data = categories;
-                return [3 /*break*/, 4];
-            case 3:
-                err_1 = _a.sent();
-                result.code = 'DR01';
-                result.message = common.status.DR01;
-                result.data = err_1;
-                return [2 /*return*/, res.json(result)];
-            case 4: return [2 /*return*/, res.json(result)];
-        }
-    });
-}); });
-exports["default"] = router;
+// import CategoryModel from '../../models/category';
+var CategoryModel = require('../../models/category');
+var CategoryService = /** @class */ (function () {
+    function CategoryService() {
+    }
+    CategoryService.prototype.getCategories = function (type) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                if (type !== undefined) {
+                    return [2 /*return*/, CategoryModel.find()
+                            .where('type').equals(type)];
+                }
+                return [2 /*return*/, CategoryModel.find()];
+            });
+        });
+    };
+    return CategoryService;
+}());
+exports["default"] = CategoryService;
