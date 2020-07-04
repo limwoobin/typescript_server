@@ -8,26 +8,26 @@ const logger = require('./config/winston');
 const config = require('./config/config.json');
 const session = require('express-session');
 const redis = require('redis');
-const redisStore = require('connect-redis')(session);
-const client = redis.createClient();
+// const redisStore = require('connect-redis')(session);
+// const client = redis.createClient();
 const passport = require('passport')
 const compression = require('compression');
 
-app.use(session({
-    store: new redisStore({
-        host: config.redis.host,
-        port: config.redis.port,
-        client: client,
-        ttl:200
-    }),
-    key: config.session.key,
-    secret: config.session.secret,
-    cookie: {
-        maxAge: 1000 * 60 * 60
-    },
-    saveUninitialized: false,
-    resave: false
-}));
+// app.use(session({
+//     store: new redisStore({
+//         host: config.redis.host,
+//         port: config.redis.port,
+//         client: client,
+//         ttl:200
+//     }),
+//     key: config.session.key,
+//     secret: config.session.secret,
+//     cookie: {
+//         maxAge: 1000 * 60 * 60
+//     },
+//     saveUninitialized: false,
+//     resave: false
+// }));
 
 app.use(passport.initialize());
 app.use(passport.session());
