@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-import CategoryService from './CategoryService';
+const CategoryService = require('./CategoryService');
 const common = require('../../common/common');
 const logger = require('../../config/winston');
 
