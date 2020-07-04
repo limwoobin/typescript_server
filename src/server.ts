@@ -1,9 +1,8 @@
 import express from 'express';
 const app = express();
 import history from 'connect-history-api-fallback';
-import bodyParser from 'body-parser';
 import router from './routes/router';
-const setting = require('./routes/setting');
+import settings from './routes/settings';
 const logger = require('./config/winston');
 const config = require('./config/config.json');
 import session from 'express-session';
@@ -39,15 +38,13 @@ app.all('/*' , (req: express.Request , res: express.Response , next: express.Nex
     next();
 });
 
-app.use(setting);
+app.use(settings);
 // app.use(history());
 // app.use('/' , express.static(__dirname + "/../../typescript_web/build"));
 app.get('/' , (req: express.Request , res: express.Response) => {
     return res.json('drogbalog api server')
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 app.use('/dr' , router);
 app.use((err: express.ErrorRequestHandler , req: express.Request , res: express.Response , next: express.NextFunction) => {
     logger.info(err);
