@@ -14,6 +14,7 @@ const CategoryModel = require('../../models/category');
 class CategoryService {
     getCategories(type) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('------------');
             if (type !== undefined) {
                 return CategoryModel.find()
                     .where('type').equals(type);
