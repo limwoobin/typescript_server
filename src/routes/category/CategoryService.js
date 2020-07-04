@@ -36,8 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-// import CategoryModel from '../../models/category';
-var CategoryModel = require('../../models/category');
+var category_1 = require("../../models/category");
+// const CategoryModel = require('../../models/category');
 var CategoryService = /** @class */ (function () {
     function CategoryService() {
     }
@@ -45,10 +45,10 @@ var CategoryService = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 if (type !== undefined) {
-                    return [2 /*return*/, CategoryModel.find()
+                    return [2 /*return*/, category_1["default"].find()
                             .where('type').equals(type)];
                 }
-                return [2 /*return*/, CategoryModel.find()];
+                return [2 /*return*/, category_1["default"].find()];
             });
         });
     };

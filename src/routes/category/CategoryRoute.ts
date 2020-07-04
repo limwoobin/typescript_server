@@ -16,6 +16,7 @@ router.get('/list' , async (req: express.Request , res: express.Response) => {
         const categories = await categoryService.getCategories(type);
         result.data = categories;
     } catch (err) {
+        console.log(err.message);
         result.code = 'DR01';
         result.message = common.status.DR01;
         result.data = err;

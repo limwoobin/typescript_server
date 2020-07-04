@@ -63,6 +63,7 @@ router.get('/list', function (req, res) { return __awaiter(void 0, void 0, void 
                 return [3 /*break*/, 4];
             case 3:
                 err_1 = _a.sent();
+                console.log(err_1.message);
                 result.code = 'DR01';
                 result.message = common.status.DR01;
                 result.data = err_1;
