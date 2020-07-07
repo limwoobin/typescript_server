@@ -13,7 +13,7 @@ router.get('/list' , async (req: express.Request , res: express.Response) => {
     result.message = common.status.DR00;
     try {
         const categoryService = new CategoryService();
-        const categories = await categoryService.getCategories(type);
+        const categories:object = await categoryService.getCategories(type);
         result.data = categories;
     } catch (err) {
         console.log(err.message);
