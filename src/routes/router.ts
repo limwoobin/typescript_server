@@ -2,7 +2,6 @@ import * as express from 'express';
 const router = express.Router();
 const memberRouter = require('./member/MemberRoute');
 const customerRouter = require('./customer/CustomerRoute');
-// const categoryRouter = require('./category/CategoryRoute');
 import categoryRouter from './category/CategoryRoute';
 const boardRouter = require('./board/BoardRoute');
 const postRouter = require('./post/PostRoute');
