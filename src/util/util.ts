@@ -44,13 +44,18 @@ export default class util {
         next();
     }
 
-    // sessionCheck(req: express.Request , res: express.Response , next: express.NextFunction) {
-    //     const result: any = common.result;
-    //     if(req.session.userEmail || req.session.key) {
-    //         result.code = 'DR01';
-    //         result.message = common.status.DR01;
-    //         return res.json(result); 
-    //     }
-    //     next();
-    // }
+    sessionCheck(req: SessionRequest , res: express.Response , next: express.NextFunction) {
+        const result: any = common.result;
+        if(req.session.userEmail || req.session.key) {
+            result.code = 'DR01';
+            result.message = common.status.DR01;
+            return res.json(result); 
+        }
+        next();
+    }
+}
+
+type SessionRequest = Request & {
+    session: Express.Request;
+    sessionId: string;   
 }
