@@ -1,13 +1,13 @@
 import * as express from 'express';
 const router = express.Router();
-const memberRouter = require('./member/MemberRoute');
-const customerRouter = require('./customer/CustomerRoute');
 import categoryRouter from './category/CategoryRoute';
-const boardRouter = require('./board/BoardRoute');
-const postRouter = require('./post/PostRoute');
-const commentRouter = require('./comment/CommentRoute');
-const visitorRouter = require('./visitor/VisitorController');
-const mailRouter = require('./mail/MailRoute');
+// const memberRouter = require('./member/MemberRoute');
+// const customerRouter = require('./customer/CustomerRoute');
+// const boardRouter = require('./board/BoardRoute');
+// const postRouter = require('./post/PostRoute');
+// const commentRouter = require('./comment/CommentRoute');
+// const visitorRouter = require('./visitor/VisitorController');
+// const mailRouter = require('./mail/MailRoute');
 const common = require('../common/common');
 
 router.get('/search/:keyword' , (req: express.Request , res: express.Response) => {
@@ -20,13 +20,13 @@ router.get('/search/:keyword' , (req: express.Request , res: express.Response) =
     return res.json(result);
 })
 
-router.use('/member' , memberRouter);
-router.use('/customer' , customerRouter);
 router.use('/category' , categoryRouter);
-router.use('/board' , boardRouter);
-router.use('/post' , postRouter);
-router.use('/comment' , commentRouter);
-router.use('/visitor' , visitorRouter);
-router.use('/mail' , mailRouter);
+// router.use('/member' , memberRouter);
+// router.use('/customer' , customerRouter);
+// router.use('/board' , boardRouter);
+// router.use('/post' , postRouter);
+// router.use('/comment' , commentRouter);
+// router.use('/visitor' , visitorRouter);
+// router.use('/mail' , mailRouter);
 
 export default router;

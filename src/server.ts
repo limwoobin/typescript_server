@@ -11,6 +11,7 @@ import redis from 'redis';
 // const client = redis.createClient();
 import passport from 'passport';
 import compression from 'compression';
+import HttpStatus from 'http-status';
 
 // app.use(session({
 //     store: new redisStore({
@@ -42,6 +43,12 @@ app.use(settings);
 // app.use(history());
 // app.use('/' , express.static(__dirname + "/../../typescript_web/build"));
 app.get('/' , (req: express.Request , res: express.Response) => {
+    console.log(HttpStatus[200]);
+    console.log(HttpStatus["200_CLASS"]);
+    console.log(HttpStatus["200_MESSAGE"]);
+    console.log(HttpStatus["200_NAME"]);
+    console.log(HttpStatus.OK);
+    console.log(HttpStatus.INTERNAL_SERVER_ERROR);
     return res.json('drogbalog api server')
 });
 
