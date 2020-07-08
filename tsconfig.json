@@ -12,6 +12,7 @@
         "allowJs": false,
         "strict": true,
         "watch": true,
+        "strictPropertyInitialization": false,
         "lib": [
             "ES2015"
         ]
