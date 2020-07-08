@@ -1,6 +1,5 @@
 import { reject } from "lodash";
 import { resolve } from "path";
-import { SERVICE_UNAVAILABLE } from "http-status";
 
 const Board = require('../../models/board');
 
@@ -50,15 +49,17 @@ export default class BoardService {
         });
     };
 
-    deleteBoard(board: any) {
-        return new Promise(function(resolve , reject){
-            Board.deleteOne({boardId:board.id , userEmail:board.userEmail} , {new: true} , (err , data) => {
-                if(err){
-                    reject(err.message);
-                }
-                resolve(data);
-            })
-        });
+    async deleteBoard(board: any) {
+        const deleteBoard: void = Board.deleteOne({boardId:board.id , userEmail:board.userEmail});
+        console.log('deleteBoard' , deleteBoard);
+        // return new Promise(function(resolve , reject){
+        //     Board.deleteOne({boardId:board.id , userEmail:board.userEmail} , {new: true} , (err , data) => {
+        //         if(err){
+        //             reject(err.message);
+        //         }
+        //         resolve(data);
+        //     })
+        // });
     };
 
     getRecentNotice() {
