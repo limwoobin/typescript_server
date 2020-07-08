@@ -1,29 +1,40 @@
 import * as express from 'express';
 const router = express.Router();
 import CategoryService from './CategoryService';
-const common = require('../../common/common');
+import HttpStatus from 'http-status';
+import ResponseType from '../../core/code/ResponseType';
+import CategoryTypeCode from '../../core/code/CategoryTypeCode';
 const logger = require('../../config/winston');
 
 router.get('/list' , async (req: express.Request , res: express.Response) => {
     logger.info('category...');
-    const type:any = req.query.type || undefined;
+    const type: any = req.query.type || undefined;
     logger.info('type:' + type);
-    const result = common.result;
-    result.code = 'DR00'
-    result.message = common.status.DR00;
+
+    const result = {} as ResponseType;
+    result.code = HttpStatus.OK;
+    result.message = HttpStatus["200"];
+    const categoryService = new CategoryService();
+    
     try {
-        const categoryService = new CategoryService();
-        const categories:object = await categoryService.getCategories(type);
+        const categories = await categoryService.getCategories(type);
         result.data = categories;
     } catch (err) {
         console.log(err.message);
-        result.code = 'DR01';
-        result.message = common.status.DR01;
-        result.data = err;
+        result.code = HttpStatus.INTERNAL_SERVER_ERROR;
+        result.message = HttpStatus["500"];
+        result.error = err.message;
         return res.json(result);
     }
 
     return res.json(result);
 })
+
+type Category = {
+    _id: string;
+    name: string;
+    routerName: string;
+    type: string;
+}
 
 export default router;
