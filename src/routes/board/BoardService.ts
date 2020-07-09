@@ -1,79 +1,43 @@
-import { reject } from "lodash";
-import { resolve } from "path";
-
 const Board = require('../../models/board');
 
 export default class BoardService {
 
     async getBoardList(boardType: string) {
-        if (boardType) {
-            Board.find({boardType: boardType} , (err: any , categories: any) => {
-                if (err) reject(err);
-                resolve(categories);
-            });
-        } 
+        return Board.find({boardType: boardType});
     };
 
     async getBoard(_id: string) {
-        Board.findOne({_id: _id} , (err: any , boardData: any) => {
-            if (err) reject(err);
+        const boardData = await Board.findOne({_id: _id});
+        if (boardData) {
             boardData.views++;
             boardData.save();
-            resolve(boardData);
-        })
+        }
+        return boardData;
     };
 
-    writeBoard(board: any) {
-        return new Promise((resolve , reject) => {
-            board.save((err: any) => {
-                if(err) reject(err);
-                resolve('success');
-            })
-        })
+    async writeBoard(board: any) {
+        return board.save();
     };
 
-    updateBoard(board: any) {
-        return new Promise(function(resolve , reject){
-            Board.findOneAndUpdate({boardId:board.id , userEmail:board.userEmail}, (
-                {
-                    title:board.title , 
-                    content:board.content,
-                    image:board.image,
-                    modiDate:board.modiDate
-                }) , {new:true} , (err: any , data: any) => {
-                if(err){
-                    reject(err);
-                }
-                resolve(data);
-            });
-        });
+    async updateBoard(board: any) {
+        Board.findOneAndUpdate({boardId:board.id , userEmail:board.userEmail}, (
+        {
+            title:board.title , 
+            content:board.content,
+            image:board.image,
+            modiDate:board.modiDate
+        }) , {new:true});
     };
 
     async deleteBoard(board: any) {
-        const deleteBoard: void = Board.deleteOne({boardId:board.id , userEmail:board.userEmail});
-        console.log('deleteBoard' , deleteBoard);
-        // return new Promise(function(resolve , reject){
-        //     Board.deleteOne({boardId:board.id , userEmail:board.userEmail} , {new: true} , (err , data) => {
-        //         if(err){
-        //             reject(err.message);
-        //         }
-        //         resolve(data);
-        //     })
-        // });
+        Board.deleteOne({boardId:board.id , userEmail:board.userEmail});
     };
 
-    getRecentNotice() {
-        return new Promise((resolve , reject) => {
-            Board.find()
-              .where('boardType').equals('notice')
-              .sort('-regDate')
-              .limit(3)
-              .select('_id title')
-              .then((data: any) => {
-                  resolve(data);
-              }).catch((err: any) => {
-                  reject(err);
-              })
-        })   
+    async getRecentNotice() {
+        return await Board.find()
+                           .where('boardType').equals('notice')
+                           .sort('-regDate')
+                           .limit(3)
+                           .select('_id title');
     }
 }
