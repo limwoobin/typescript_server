@@ -1,6 +1,6 @@
-import CategoryTypeCode from '../../core/code/CategoryTypeCode';
+import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 
-export default interface MemberTypes {
+export default interface CategoryTypes {
     name: string;
     type: string;
     routerName: CategoryTypeCode;    
