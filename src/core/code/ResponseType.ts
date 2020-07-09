@@ -3,18 +3,19 @@ type ResponseConfig<T> = { code: HttpStatusCode, message: string; data: T; error
 enum HttpStatusCode {
     OK = 200,
     NOT_FOUND = 404,
+    SERVER_ERROR = 500,
 }
 
 export default class Response<T> {
     code: HttpStatusCode = HttpStatusCode.OK;
-    message: string;
+    message: string = "OK";
     data: T;
     error: any;
     
-    Response(config:ResponseConfig<T>) {
-        this.code = config.code;
-        this.message = config.message;
-        this.data = config.data;
-        this.error = config.error;
+    Response(response: ResponseConfig<T>) {
+        this.code = response.code;
+        this.message = response.message;
+        this.data = response.data;
+        this.error = response.error;
     }
 }
