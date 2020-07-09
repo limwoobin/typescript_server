@@ -1,5 +1,6 @@
 import Board from '../../models/board';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
+import { BoardModel } from '../../core/model/BoardModel';
 
 export default class BoardService {
 
@@ -8,7 +9,7 @@ export default class BoardService {
     };
 
     async getBoard(_id: string) {
-        const boardData = await Board.findOne({_id: _id});
+        const boardData: BoardModel | any = await Board.findOne({_id: _id});
         if (boardData) {
             boardData.views++;
             boardData.save();
