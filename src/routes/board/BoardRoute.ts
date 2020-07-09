@@ -47,4 +47,10 @@ router.get('/view/:id' , util.checkBoardId , async (req: express.Request , res: 
     return res.json(result);
 })
 
+router.post('/write' , async (req: express.Request , res: express.Response ) => {
+    const result = new Response<''>();
+
+    return res.json(result);
+})
+
 export default router;
