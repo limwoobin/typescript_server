@@ -1,8 +1,9 @@
-const Board = require('../../models/board');
+import Board from '../../models/board';
+import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 
 export default class BoardService {
 
-    async getBoardList(boardType: string) {
+    async getBoardList(boardType: CategoryTypeCode) {
         return Board.find({boardType: boardType});
     };
 
