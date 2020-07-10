@@ -27,7 +27,7 @@ router.get('/list/:type' , async (req: express.Request , res: express.Response) 
     }
 
     return res.json(result);
-})
+});
 
 router.get('/view/:id' , util.checkBoardId , async (req: express.Request , res: express.Response) => {
     const result = new Response<BoardModel>();
@@ -45,7 +45,7 @@ router.get('/view/:id' , util.checkBoardId , async (req: express.Request , res: 
     }
 
     return res.json(result);
-})
+});
 
 router.post('/write' , async (req: express.Request , res: express.Response ) => {
     const result = new Response<''>();
@@ -68,6 +68,24 @@ router.post('/update' , async (req: express.Request , res: express.Response) => 
 
     try {
         const updateBoard: void | any = await boardService.updateBoard(req.body);
+        console.log('updateBoard' , updateBoard);
+    } catch (err) {
+        logger.info(err.message);
+        result.code = HttpStatus.INTERNAL_SERVER_ERROR;
+        result.message = HttpStatus[500];
+        result.error = err.message;
+        return res.json(result);
+    }
+
+    return res.json(result);
+});
+
+router.delete('/delete' , async (req: express.Request , res: express.Response) => {
+    const result = new Response<''>();
+
+    try {
+        const deleteBoard: void = await boardService.deleteBoard(req.body);
+        console.log('deleteBoard' , deleteBoard);
     } catch (err) {
         logger.info(err.message);
         result.code = HttpStatus.INTERNAL_SERVER_ERROR;

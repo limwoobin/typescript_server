@@ -28,20 +28,21 @@ export default class BoardService {
     };
 
     async updateBoard(boardData: any) {
-        let board = new Board();
+        let board: BoardModel = new Board();
         board = boardData;
-        
-        Board.findOneAndUpdate({boardId:board.id , userEmail:board.userEmail}, (
+
+        Board.findOneAndUpdate({boardId:board.boardId , userEmail:board.userEmail}, (
         {
             title:board.title , 
             content:board.content,
-            image:board.image,
             modiDate:board.modiDate
         }) , {new:true});
     };
 
-    async deleteBoard(board: any) {
-        Board.deleteOne({boardId:board.id , userEmail:board.userEmail});
+    async deleteBoard(boardData: any) {
+        let board: BoardModel = new Board();
+        board = boardData;
+        Board.deleteOne({boardId:board.boardId , userEmail:board.userEmail});
     };
 
     async getRecentNotice() {
