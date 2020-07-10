@@ -17,22 +17,32 @@ export default class BoardService {
         return boardData;
     };
 
-    async writeBoard(board: any) {
+    async writeBoard(boardData: any) {
+        let board = new Board();
+        board.boardType = boardData.boardType;
+        board.userEmail = boardData.userEmail;
+        board.title = boardData.title;
+        board.content = boardData.content;
+
         return board.save();
     };
 
-    async updateBoard(board: any) {
-        Board.findOneAndUpdate({boardId:board.id , userEmail:board.userEmail}, (
+    async updateBoard(boardData: any) {
+        let board: BoardModel = new Board();
+        board = boardData;
+
+        Board.findOneAndUpdate({boardId:board.boardId , userEmail:board.userEmail}, (
         {
             title:board.title , 
             content:board.content,
-            image:board.image,
             modiDate:board.modiDate
         }) , {new:true});
     };
 
-    async deleteBoard(board: any) {
-        Board.deleteOne({boardId:board.id , userEmail:board.userEmail});
+    async deleteBoard(boardData: any) {
+        let board: BoardModel = new Board();
+        board = boardData;
+        Board.deleteOne({boardId:board.boardId , userEmail:board.userEmail});
     };
 
     async getRecentNotice() {
