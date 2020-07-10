@@ -23,11 +23,14 @@ export default class BoardService {
         board.userEmail = boardData.userEmail;
         board.title = boardData.title;
         board.content = boardData.content;
-        
+
         return board.save();
     };
 
-    async updateBoard(board: any) {
+    async updateBoard(boardData: any) {
+        let board = new Board();
+        board = boardData;
+        
         Board.findOneAndUpdate({boardId:board.id , userEmail:board.userEmail}, (
         {
             title:board.title , 
