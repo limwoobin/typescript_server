@@ -17,7 +17,13 @@ export default class BoardService {
         return boardData;
     };
 
-    async writeBoard(board: any) {
+    async writeBoard(boardData: any) {
+        let board = new Board();
+        board.boardType = boardData.boardType;
+        board.userEmail = boardData.userEmail;
+        board.title = boardData.title;
+        board.content = boardData.content;
+        
         return board.save();
     };
 

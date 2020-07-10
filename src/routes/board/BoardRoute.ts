@@ -49,7 +49,16 @@ router.get('/view/:id' , util.checkBoardId , async (req: express.Request , res: 
 
 router.post('/write' , async (req: express.Request , res: express.Response ) => {
     const result = new Response<''>();
-
+    
+    try {
+        const writeBoard: void = await boardService.writeBoard(req.body);
+    } catch (err) {
+        logger.info(err.message);
+        result.code = HttpStatus.INTERNAL_SERVER_ERROR;
+        result.message = HttpStatus[500];
+        result.error = err.message;
+        return res.json(result);
+    }
     return res.json(result);
 })
 
