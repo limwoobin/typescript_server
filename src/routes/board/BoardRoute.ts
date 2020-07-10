@@ -97,4 +97,21 @@ router.delete('/delete' , async (req: express.Request , res: express.Response) =
     return res.json(result);
 })
 
+router.get('/recent/notice' , async (req: express.Request , res: express.Response) => {
+    const result = new Response<BoardModel[]>();
+
+    try {
+        const recentNotice: BoardModel[] = await boardService.getRecentNotice();
+        result.data = recentNotice;
+    } catch (err) {
+        logger.info(err.message);
+        result.code = HttpStatus.INTERNAL_SERVER_ERROR;
+        result.message = HttpStatus[500];
+        result.error = err.message;
+        return res.json(result);
+    }
+    
+    return res.json(result);
+})
+
 export default router;
