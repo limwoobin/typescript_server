@@ -1,1 +1,6 @@
-console.log('111');
+require('date-utils');
+const d = new Date();
+
+
+
+console.log(new Date().toLocaleString());
