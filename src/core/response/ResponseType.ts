@@ -17,16 +17,16 @@ export class Response<T> {
     }
 }
  
-export class ResponseException<T> {
+export class ResponseException {
     code: HttpStatusCode = HttpStatusCode.SERVER_ERROR;
     message: HttpStatusMessage = HttpStatusMessage.SERVER_ERROR;
     data: any;
-    error: T;
+    error: any;
     
-    Response(response: ResponseError<T>) {
-        this.code = response.code;
-        this.message = response.message;
-        this.data = response.data;
-        this.error = response.error;
+    // ResponseException(errMessage: string) {
+    //     this.error = errMessage;
+    // }
+    constructor(errMessage: string) {
+        this.error = errMessage;
     }
 }

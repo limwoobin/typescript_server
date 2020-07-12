@@ -1,7 +1,6 @@
 import * as express from 'express';
 const router = express.Router();
 import CategoryService from './CategoryService';
-import HttpStatus from 'http-status';
 import { Response, ResponseException } from '../../core/response/ResponseType';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 import { CategoryModel } from '../../core/model/CategoryModel';
@@ -19,9 +18,7 @@ router.get('/list' , async (req: express.Request , res: express.Response) => {
         result.data = categories;
     } catch (err) {
         logger.info("message:" + err.message);
-        const errorMessage = err.message;
-        const resultException = new ResponseException<''>();
-        return res.json('');
+        return res.json(new ResponseException(err.message));
     }
 
     return res.json(result);

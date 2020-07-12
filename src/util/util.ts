@@ -1,7 +1,6 @@
 import * as express from 'express';
 import { Request } from 'express-serve-static-core';
-import { Response } from '../core/response/ResponseType';
-import HttpStatus from 'http-status';
+import { Response , ResponseException} from '../core/response/ResponseType';
 import Board from '../models/board';
 const common = require('../common/common');
 const Post = require('../models/post');
@@ -15,10 +14,7 @@ export default class util {
         console.log('_id:' + _id);
         Board.findOne({_id:_id} , (err:Error) => {
             if (err) {
-                // result.code = HttpStatus.INTERNAL_SERVER_ERROR;
-                // result.message = HttpStatus[500];
-                // result.error = err.message;
-                return res.json(result); 
+                return res.json(new ResponseException(err.message)); 
             }
             next();
         });
