@@ -1,4 +1,5 @@
 import { CategoryTypeCode } from '../code/CategoryTypeCode';
+import { CommentModel } from './CommentModel';
 
 export type BoardModel = {
     _id: string;
@@ -7,8 +8,8 @@ export type BoardModel = {
     boardType: CategoryTypeCode;
     title: string;
     content: any;
-    comments: [];
+    comments: CommentModel[];
     views: number;
-    regDate: Date;
-    modiDate: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }

@@ -1,4 +1,4 @@
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 import BoardTypes from './types/BoardTypes';
 const config = require('../config/config');
@@ -13,10 +13,10 @@ const Board = new mongoose.Schema({
     boardType   : {type: String , required: true },
     title       : {type: String , required: true},
     content     : {type: String},
-    comments    : [],
+    comments    : {type: []},
     views       : {type: Number , default: 0},
-    regDate     : {type: Date , default: Date.now },
-    modiDate    : {type: Date , default: Date.now }
+    createdAt   : {type: Date , default: Date.now },
+    updatedAt   : {type: Date , default: Date.now }
 });
 
 Board.plugin(autoIncrement.plugin , {

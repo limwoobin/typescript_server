@@ -35,7 +35,7 @@ export default class BoardService {
         {
             title:board.title , 
             content:board.content,
-            modiDate:board.modiDate
+            updatedAt:board.updatedAt
         }) , {new:true});
     };
 
@@ -48,7 +48,7 @@ export default class BoardService {
     async getRecentNotice() {
         return await Board.find()
                            .where('boardType').equals('notice')
-                           .sort('-regDate')
+                           .sort('-createdAt')
                            .limit(3)
                            .select('_id title');
     }

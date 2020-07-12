@@ -23,9 +23,6 @@ export class ResponseException {
     data: any;
     error: any;
     
-    // ResponseException(errMessage: string) {
-    //     this.error = errMessage;
-    // }
     constructor(errMessage: string) {
         this.error = errMessage;
     }

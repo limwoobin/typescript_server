@@ -1,4 +1,5 @@
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
+import { CommentModel } from '../../core/model/CommentModel';
 
 export default interface BoardTypes {
     boardId: number,
@@ -6,8 +7,8 @@ export default interface BoardTypes {
     boardType: CategoryTypeCode,
     title: string,
     content: any,
-    comments: [],
+    comments: CommentModel[],
     views: number,
-    regDate: Date,
-    modiDate: Date
+    createdAt: Date,
+    updatedAt: Date
 };
