@@ -5,7 +5,7 @@ import Util from '../../util/util';
 import { Response , ResponseException } from '../../core/response/ResponseType';
 import { BoardModel } from '../../core/model/BoardModel';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
-const logger = require('../../config/winston');
+import logger from '../../core/config/winston';
 
 const util = new Util();
 const boardService = new BoardService();

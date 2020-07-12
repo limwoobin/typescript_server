@@ -1,9 +1,9 @@
 import nodemailer from 'nodemailer';
 import smtpTransport from 'nodemailer-smtp-transport';
 import crypto from 'crypto';
+import logger from '../../core/config/winston';
 const config = require('../../config/config.json');
 const Member = require('../../models/member');
-const logger = require('../../config/winston');
 const configFunc = require('../../config/config');
 
 

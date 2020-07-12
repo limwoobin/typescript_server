@@ -4,7 +4,6 @@ import CategoryService from './CategoryService';
 import { Response, ResponseException } from '../../core/response/ResponseType';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 import { CategoryModel } from '../../core/model/CategoryModel';
-// const logger = require('../../config/winston');
 import logger from '../../core/config/winston';
 
 router.get('/list' , async (req: express.Request , res: express.Response) => {
