@@ -5,6 +5,10 @@ const ChildComment = require('../../models/childComment');
 
 export default class CommentService {
 
+    async getMyComments(userEmail: string) {
+        await Comment.find({userEmail: userEmail});        
+    }
+
     async writeComment(commentData: CommentModel) {
         if (commentData.commentId) {
             let childComment = new ChildComment();
@@ -39,6 +43,5 @@ export default class CommentService {
 
         setChildComments(comments);
         return comments;
-        // return await Comment.find({board: id});
     }
 }
