@@ -8,13 +8,6 @@ export class Response<T> {
     message: HttpStatusMessage = HttpStatusMessage.OK;
     data: T;
     error: any;
-    
-    Response(response: ResponseConfig<T>) {
-        this.code = response.code;
-        this.message = response.message;
-        this.data = response.data;
-        this.error = response.error;
-    }
 }
  
 export class ResponseException {

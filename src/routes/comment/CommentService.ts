@@ -6,7 +6,7 @@ const ChildComment = require('../../models/childComment');
 export default class CommentService {
 
     async getMyComments(userEmail: string) {
-        await Comment.find({userEmail: userEmail});        
+        return Comment.find({userEmail: userEmail});        
     }
 
     async writeComment(commentData: CommentModel) {
@@ -34,7 +34,7 @@ export default class CommentService {
             }
         };
 
-        async function setChildValue(c) {
+        async function setChildValue(c: any) {
             const childComments: any = await ChildComment.find({commentId: c._id});
             if (childComments.length !== 0) {
                 c.childComments = childComments;
@@ -43,5 +43,19 @@ export default class CommentService {
 
         setChildComments(comments);
         return comments;
+    }
+
+    async updateComment(board: any) {
+        const updateBoard = await Board.findOneAndUpdate(
+                                {
+                                    userEmail: board.userEmail,
+                                    id: board._id,
+                                    comment: board.content
+                                },
+                                {
+                                    comment: board.comment,
+                                } , {new: true});
+        
+        return updateBoard;
     }
 }
