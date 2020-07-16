@@ -1,7 +1,7 @@
 import * as express from 'express';
 const router = express.Router();
 import mongoose from 'mongoose';
-import logger from '../../core/config/winston';
+import logger from './winston';
 const config = require('../../config/config.json');
 const db = mongoose.connection;
 mongoose.Promise = global.Promise;

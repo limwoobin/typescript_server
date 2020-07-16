@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import dbConnect from '../core/config/MongoRepository';
+import dbConnect from '../core/config/MongodbConfig';
 const app = express();
 const router = express.Router();
 

@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { Request } from 'express-serve-static-core';
-import { Response , ResponseException} from '../core/response/ResponseType';
-import Board from '../models/board';
+import { Response , ResponseException} from '../response/ResponseType';
+import Board from '../../models/board';
 const common = require('../common/common');
 const Post = require('../models/post');
 

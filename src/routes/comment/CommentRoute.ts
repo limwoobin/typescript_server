@@ -3,7 +3,7 @@ const router = express.Router();
 import CommentService from './CommentService';
 import { Response , ResponseException } from '../../core/response/ResponseType';
 import Board from '../../models/board';
-import Util from '../../util/util';
+import Util from '../../core/util/util';
 import logger from '../../core/config/winston';
 import { CommentModel } from '../../core/model/CommentModel';
 import { BoardModel } from '../../core/model/BoardModel';

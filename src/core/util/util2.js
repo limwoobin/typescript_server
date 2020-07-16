@@ -1,6 +1,6 @@
-const common = require('../common/common');
-const Board = require('../models/board');
-const Post = require('../models/post');
+const common = require('../../common/common');
+const Board = require('../../models/board');
+const Post = require('../../models/post');
 
 function UtilFunc(){
 

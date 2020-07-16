@@ -1,7 +1,7 @@
 import * as express from 'express';
 const router = express.Router();
 import BoardService from './BoardService';
-import Util from '../../util/util';
+import Util from '../../core/util/util';
 import { Response , ResponseException } from '../../core/response/ResponseType';
 import { BoardModel } from '../../core/model/BoardModel';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
