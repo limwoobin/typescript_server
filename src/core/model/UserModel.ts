@@ -4,6 +4,6 @@ export type UserModel = {
     userPwd: string;
     salt: string;
     userName: string;
-    birthda: Date;
+    birthday: Date;
     createdAt: Date;
 }

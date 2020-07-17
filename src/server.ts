@@ -6,11 +6,13 @@ import settings from './routes/settings';
 import logger from './core/config/winston';
 const config = require('./core/config/config.json');
 import session from 'express-session';
-import redis from 'redis';
-// import redisStore from 'connect-redis'(session);
+// import redis from 'redis';
+// import connectRedis from 'connect-redis';
 // const client = redis.createClient();
 import passport from 'passport';
 import compression from 'compression';
+
+// let redisStore = connectRedis(session);
 
 // app.use(session({
 //     store: new redisStore({
@@ -19,7 +21,6 @@ import compression from 'compression';
 //         client: client,
 //         ttl:200
 //     }),
-//     key: config.session.key,
 //     secret: config.session.secret,
 //     cookie: {
 //         maxAge: 1000 * 60 * 60

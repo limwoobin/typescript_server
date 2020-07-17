@@ -5,7 +5,7 @@ import Board from '../../models/board';
 import crypto from 'crypto';
 const Post = require('../../models/post');
 
-const result = new Response();
+const result = new Response<'success'>();
 
 export default class Util {
 
@@ -21,32 +21,25 @@ export default class Util {
     }
 
     checkPostId(req: express.Request , res: express.Response , next: express.NextFunction) {
-        const result: any = new Response();
         const _id: string = req.params.id || req.body._id;
-        Post.findOne({_id:_id} , (err:Error) => {
-            if(err) {
-                result.code = 'DR02';
-                result.data = err.message;
-                return res.json(result); 
+        Post.findOne({_id: _id} , (err: Error) => {
+            if (err) {
+                return res.json(new ResponseException(err.message)); 
             }
             next();
         });
     }
 
     isLogged(req: express.Request , res: express.Response , next: express.NextFunction) {
-        const result: any = new Response();
         if(!req.user){
-            result.code = 'DR03';
-            return res.json(result); 
+            return res.json(new ResponseException('empty data')); 
         }
         next();
     }
 
-    sessionCheck(req: SessionRequest , res: express.Response , next: express.NextFunction) {
-        const result: any = new Response();
+    sessionCheck(req: SessionRequest | any , res: express.Response , next: express.NextFunction) {
         if(req.session.userEmail || req.session.key) {
-            result.code = 'DR01';
-            return res.json(result); 
+            return res.json(new ResponseException('empty data')); 
         }
         next();
     }

@@ -3,7 +3,7 @@ const router = express.Router();
 import categoryRouter from './category/CategoryRoute';
 import boardRouter from './board/BoardRoute';
 import commentRouter from './comment/CommentRoute';
-// const memberRouter = require('./member/MemberRoute');
+import userRouter from './user/UserRoute';
 // const customerRouter = require('./customer/CustomerRoute');
 // const postRouter = require('./post/PostRoute');
 // const visitorRouter = require('./visitor/VisitorController');
@@ -22,10 +22,10 @@ import commentRouter from './comment/CommentRoute';
 
 router.use('/category' , categoryRouter);
 router.use('/board' , boardRouter);
-// router.use('/member' , memberRouter);
+router.use('/user' , userRouter);
+router.use('/comment' , commentRouter);
 // router.use('/customer' , customerRouter);
 // router.use('/post' , postRouter);
-router.use('/comment' , commentRouter);
 // router.use('/visitor' , visitorRouter);
 // router.use('/mail' , mailRouter);
 
