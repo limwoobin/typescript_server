@@ -7,7 +7,7 @@ const Post = require('../../models/post');
 
 const result = new Response();
 
-export default class util {
+export default class Util {
 
     checkBoardId(req: express.Request , res: express.Response , next: express.NextFunction) {
         const _id: string = req.params.id || req.body._id;
@@ -52,11 +52,8 @@ export default class util {
     }
 
     async getRandomString() {
-        return new Promise(function(resolve , reject){
-            crypto.randomBytes(15, async (err, buf) => {
-                resolve(buf.toString('base64'));
-            });
-        });
+        const buf = await crypto.randomBytes(15);
+        return buf.toString('base64');
     }
 }
 
