@@ -4,5 +4,5 @@ export enum PostTypeCode {
     TYPESCRIPT = "typescript",
     JAVA = "java",
     JAVASCRIPT = "javascript",
-    ALGORITHM = "algorithm"
+    ALGORITHM = "algorithm",
 }
