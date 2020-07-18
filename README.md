@@ -4,6 +4,8 @@ typescript + express
 
 폴더구조
 
+<pre>
+<code>
 src
   | core : 전체적인 설정파일 및 공통모듈 정의
       | code : enum 타입의 코드 정의모음
@@ -24,3 +26,5 @@ src
       | post : 
       | user : 
    server.ts : 메인 실행 파일
+</code>
+</pre>
