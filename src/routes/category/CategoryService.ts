@@ -1,18 +1,22 @@
 import categoryModel from '../../models/category';
-import { Service , Inject } from 'typedi';
-import { CategoryModel } from '../../core/model/CategoryModel';
+import { Service } from 'typedi';
+import { InjectRepository } from 'typeorm-typedi-extensions';
+import { CategoryRepository } from './CategoryRepository';
+import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
+
+const categoryRepository = new CategoryRepository();
 
 @Service()
 export default class CategoryService {
-    constructor(
-        // @Inject('categoryModel') private categoryModel: CategoryModel
-    ) {}
+    // constructor(
+    //     @InjectRepository() private categoryRepository: CategoryRepository
+    // ) {}
 
-    async getCategories(type: string | undefined) {
+    public async getCategories(type: CategoryTypeCode | undefined) {
+
         if(type) {
-            return categoryModel.find()
-                           .where('type').equals(type);
+            return categoryRepository.findByType(type);
         }        
-        return categoryModel.find();
+        return categoryRepository.find();
     }
 }

@@ -1,5 +1,6 @@
 import * as express from 'express';
 const router = express.Router();
+
 import categoryRouter from './category/CategoryRoute';
 import boardRouter from './board/BoardRoute';
 import commentRouter from './comment/CommentRoute';
