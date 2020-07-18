@@ -1,65 +1,81 @@
-'use strict';
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var express = require('express');
-var router = express.Router();
-var CategoryService = require('./CategoryService');
-var common = require('../../common/common');
-var logger = require('../../config/winston');
-
-router.get('/list', function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
-        var result, categories;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-                switch (_context.prev = _context.next) {
-                    case 0:
-                        logger.info('category...');
-                        result = common.result;
-
-                        result.code = 'DR00';
-                        result.message = common.status.DR00;
-                        _context.prev = 4;
-                        _context.next = 7;
-                        return CategoryService.getCategories();
-
-                    case 7:
-                        categories = _context.sent;
-
-                        result.data = categories;
-                        _context.next = 17;
-                        break;
-
-                    case 11:
-                        _context.prev = 11;
-                        _context.t0 = _context['catch'](4);
-
-                        result.code = 'DR01';
-                        result.message = common.status.DR01;
-                        result.data = _context.t0;
-                        return _context.abrupt('return', res.json(result));
-
-                    case 17:
-                        return _context.abrupt('return', res.json(result));
-
-                    case 18:
-                    case 'end':
-                        return _context.stop();
-                }
-            }
-        }, _callee, undefined, [[4, 11]]);
-    }));
-
-    return function (_x, _x2) {
-        return _ref.apply(this, arguments);
-    };
-}());
-
-router.get('/test', function (req, res) {
-    req.session.key = req.sessionID;
-    console.log('key:' + req.session.key);
-    return res.json('aa');
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
 });
-
-module.exports = router;
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express = __importStar(require("express"));
+// import {
+//     JsonController,
+//     Get,
+//     HttpCode
+// } from 'routing-controllers';
+const router = express.Router();
+const CategoryService_1 = __importDefault(require("./CategoryService"));
+const ResponseType_1 = require("../../core/response/ResponseType");
+const winston_1 = __importDefault(require("../../core/config/winston"));
+router.get('/list', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const type = req.query.type;
+    winston_1.default.info('type:' + type);
+    const result = new ResponseType_1.Response();
+    const categoryService = new CategoryService_1.default();
+    try {
+        const categories = yield categoryService.getCategories(type);
+        result.data = categories;
+    }
+    catch (err) {
+        winston_1.default.info("message:" + err.message);
+        return res.json(new ResponseType_1.ResponseException(err.message));
+    }
+    return res.json(result);
+}));
+exports.default = router;
+// @JsonController('/category')
+// export default class CategoryRoute {
+//     constructor(
+//         private categoryService: CategoryService
+//     ){}
+//     @HttpCode(200)
+//     @Get('/list')
+//     public async getCategories(req: express.Request , res: express.Response) {
+//         const type: CategoryTypeCode = req.query.type as any;
+//         logger.info('type:' + type);
+//         const result = new Response<CategoryModel[]>();
+//         try {
+//             const categories: CategoryModel[] | any = await this.categoryService.getCategories(type);
+//             result.data = categories;
+//         } catch (err) {
+//             logger.info("message:" + err.message);
+//             return res.json(new ResponseException(err.message));
+//         }
+//         return res.json(result);
+//     }
+// };
+//# sourceMappingURL=CategoryRoute.js.map

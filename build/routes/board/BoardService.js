@@ -1,77 +1,76 @@
-'use strict';
-
-var Board = require('../../models/board');
-
-exports.getBoardList = function (boardType) {
-    return new Promise(function (resolve, reject) {
-        if (boardType) {
-            Board.find({ boardType: boardType }, function (err, categories) {
-                if (err) {
-                    reject(err);
-                }
-                resolve(categories);
-            });
-        } else {
-            reject(err);
-        }
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-
-exports.getBoard = function (_id) {
-    return new Promise(function (resolve, reject) {
-        Board.findOne({ _id: _id }, function (err, boardData) {
-            if (err) {
-                reject(err);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const board_1 = __importDefault(require("../../models/board"));
+class BoardService {
+    getBoardList(boardType) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return board_1.default.find({ boardType: boardType });
+        });
+    }
+    ;
+    getBoard(_id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const boardData = yield board_1.default.findOne({ _id: _id });
+            if (boardData) {
+                boardData.views++;
+                boardData.save();
             }
-            boardData.views++;
-            boardData.save();
-            resolve(boardData);
+            return boardData;
         });
-    });
-};
-
-exports.writeBoard = function (board) {
-    return new Promise(function (resolve, reject) {
-        board.save(function (err) {
-            if (err) reject(err);
-            resolve('success');
+    }
+    ;
+    writeBoard(boardData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let board = new board_1.default();
+            board.boardType = boardData.boardType;
+            board.userEmail = boardData.userEmail;
+            board.title = boardData.title;
+            board.content = boardData.content;
+            return board.save();
         });
-    });
-};
-
-exports.updateBoard = function (board) {
-    return new Promise(function (resolve, reject) {
-        Board.findOneAndUpdate({ boardId: board.id, userEmail: board.userEmail }, {
-            title: board.title,
-            content: board.content,
-            image: board.image,
-            modiDate: board.modiDate
-        }, { new: true }, function (err, data) {
-            if (err) {
-                reject(err);
-            }
-            resolve(data);
+    }
+    ;
+    updateBoard(boardData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let board = new board_1.default();
+            board = boardData;
+            board_1.default.findOneAndUpdate({ boardId: board.boardId, userEmail: board.userEmail }, ({
+                title: board.title,
+                content: board.content,
+                updatedAt: board.updatedAt
+            }), { new: true });
         });
-    });
-};
-
-exports.deleteBoard = function (board) {
-    return new Promise(function (resolve, reject) {
-        Board.deleteOne({ boardId: board.id, userEmail: board.userEmail }, { new: true }, function (err, data) {
-            if (err) {
-                reject(err.message);
-            }
-            resolve(data);
+    }
+    ;
+    deleteBoard(boardData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let board = new board_1.default();
+            board = boardData;
+            board_1.default.deleteOne({ boardId: board.boardId, userEmail: board.userEmail });
         });
-    });
-};
-
-exports.getRecentNotice = function () {
-    return new Promise(function (resolve, reject) {
-        Board.find().where('boardType').equals('notice').sort('-regDate').limit(3).select('_id title').then(function (data) {
-            resolve(data);
-        }).catch(function (err) {
-            reject(err);
+    }
+    ;
+    getRecentNotice() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield board_1.default.find()
+                .where('boardType').equals('notice')
+                .sort('-createdAt')
+                .limit(3)
+                .select('_id title');
         });
-    });
-};
+    }
+}
+exports.default = BoardService;
+//# sourceMappingURL=BoardService.js.map

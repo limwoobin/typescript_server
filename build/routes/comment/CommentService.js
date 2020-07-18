@@ -1,127 +1,81 @@
-'use strict';
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var Board = require('../../models/board');
-var Comment = require('../../models/comment');
-var ChildComment = require('../../models/childComment');
-
-var CommentService = {};
-
-CommentService.getSelfComments = function () {
-    return new Promise(function (resolve, reject) {
-        var board = new Board();
-        var data = {};
-        board.comment.userEmail = req.params.userEmail;
-        Board.comment.findById({ userEmail: board.userEmail }, function (err, comments) {
-            if (err) {
-                reject(err);
-            }
-            data.comment = comments;
-            Board.childComment.findById({ boardId: comment.parentId }, function (err, childComments) {
-                if (err) {
-                    reject(err);
-                }
-                data.comment.childComment = childComments;
-            });
-            resolve(data);
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const board_1 = __importDefault(require("../../models/board"));
+const comment_1 = __importDefault(require("../../models/comment"));
+const childComment_1 = __importDefault(require("../../models/childComment"));
+class CommentService {
+    getMyComments(userEmail) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return comment_1.default.find({ userEmail: userEmail });
         });
-    });
-};
-
-CommentService.writeComment = function (commentData) {
-    return new Promise(function (resolve, reject) {
-        if (commentData.commentId) {
-            var childCommnet = new ChildComment();
-            childCommnet.userEmail = commentData.userEmail;
-            childCommnet.content = commentData.content;
-            childCommnet.board = commentData._id;
-            childCommnet.boardType = commentData.boardType;
-            childCommnet.commentId = commentData.commentId;
-            childCommnet.save(function (err) {
-                if (err) {
-                    reject(err);
-                }
-                resolve('success');
-            });
-        } else {
-            var _comment = new Comment();
-            _comment.userEmail = commentData.userEmail;
-            _comment.content = commentData.content;
-            _comment.board = commentData._id;
-            _comment.boardType = commentData.boardType;
-            _comment.save(function (err) {
-                if (err) {
-                    reject(err);
-                }
-                resolve('success');
-            });
-        }
-    });
-};
-
-CommentService.getComments = function (id) {
-    return new Promise(function (resolve, reject) {
-        Comment.find({ board: id }, function (err, comments) {
-            var setChildComments = function () {
-                var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(comments) {
-                    var c;
-                    return regeneratorRuntime.wrap(function _callee$(_context) {
-                        while (1) {
-                            switch (_context.prev = _context.next) {
-                                case 0:
-                                    _context.t0 = regeneratorRuntime.keys(comments);
-
-                                case 1:
-                                    if ((_context.t1 = _context.t0()).done) {
-                                        _context.next = 7;
-                                        break;
-                                    }
-
-                                    c = _context.t1.value;
-                                    _context.next = 5;
-                                    return setChildValue(comments[c]);
-
-                                case 5:
-                                    _context.next = 1;
-                                    break;
-
-                                case 7:
-                                    resolve(comments);
-
-                                case 8:
-                                case 'end':
-                                    return _context.stop();
-                            }
-                        }
-                    }, _callee, this);
-                }));
-
-                return function setChildComments(_x) {
-                    return _ref.apply(this, arguments);
-                };
-            }();
-
-            if (err) {
-                reject(err);
+    }
+    writeComment(commentData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (commentData.commentId) {
+                let childComment = new childComment_1.default();
+                childComment.userEmail = commentData.userEmail;
+                childComment.content = commentData.content;
+                childComment.board = commentData._id;
+                childComment.commentId = commentData.commentId;
+                yield childComment.save();
             }
-
-
+            else {
+                let comment = new comment_1.default();
+                comment.userEmail = commentData.userEmail;
+                comment.content = commentData.content;
+                comment.board = commentData._id;
+                yield comment.save();
+            }
+        });
+    }
+    ;
+    getComments(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const comments = yield comment_1.default.find({ board: id });
+            function setChildComments(c) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    for (let c in comments) {
+                        yield setChildValue(comments[c]);
+                    }
+                });
+            }
+            ;
             function setChildValue(c) {
-                return new Promise(function (resolve, reject) {
-                    ChildComment.find({ commentId: c._id }, function (err, childComments) {
-                        if (err) reject(err);
-                        if (childComments.length !== 0) {
-                            c.childComments = childComments;
-                        }
-                        resolve();
-                    });
+                return __awaiter(this, void 0, void 0, function* () {
+                    const childComments = yield childComment_1.default.find({ commentId: c._id });
+                    if (childComments.length !== 0) {
+                        c.childComments = childComments;
+                    }
                 });
             }
             setChildComments(comments);
-            // resolve(comments);
+            return comments;
         });
-    });
-};
-
-module.exports = CommentService;
+    }
+    updateComment(board) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const updateBoard = yield board_1.default.findOneAndUpdate({
+                userEmail: board.userEmail,
+                id: board._id,
+                comment: board.content
+            }, {
+                comment: board.comment,
+            }, { new: true });
+            return updateBoard;
+        });
+    }
+}
+exports.default = CommentService;
+//# sourceMappingURL=CommentService.js.map

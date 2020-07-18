@@ -1,50 +1,54 @@
-'use strict';
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var express = require('express');
-var router = express.Router();
-var mailConfig = require('../../config/mailConfig');
-var common = require('../../common/common');
-
-router.get('/password/find/:toEmail', function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
-        var result, toEmail, sendMail;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-                switch (_context.prev = _context.next) {
-                    case 0:
-                        result = common.result;
-
-                        result.code = 'DR00';
-                        result.message = common.status.DR00;
-                        toEmail = req.params.toEmail;
-
-                        console.log(toEmail);
-                        _context.next = 7;
-                        return mailConfig.passwordFindMail(toEmail);
-
-                    case 7:
-                        sendMail = _context.sent;
-
-                        if (sendMail !== 'DR00') {
-                            result.code = 'DR01';
-                            result.message = common.status.DR01;
-                            result.data = sendMail;
-                        }
-                        return _context.abrupt('return', res.json(result));
-
-                    case 10:
-                    case 'end':
-                        return _context.stop();
-                }
-            }
-        }, _callee, undefined);
-    }));
-
-    return function (_x, _x2) {
-        return _ref.apply(this, arguments);
-    };
-}());
-
-module.exports = router;
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express = __importStar(require("express"));
+const MailService_1 = __importDefault(require("./MailService"));
+const router = express.Router();
+const ResponseType_1 = require("../../core/response/ResponseType");
+const winston_1 = __importDefault(require("../../core/config/winston"));
+const mailService = new MailService_1.default();
+router.get('/password/find/:toEmail', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = new ResponseType_1.Response();
+    const toEmail = req.params.toEmail;
+    try {
+        const sendMail = yield mailService.passwordFindMail(toEmail);
+        result.data = sendMail;
+        winston_1.default.info('sendMail:' + sendMail);
+    }
+    catch (err) {
+        return res.json(new ResponseType_1.ResponseException(err.message));
+    }
+    return res.json(result);
+}));
+exports.default = router;
+//# sourceMappingURL=MailRoute.js.map
