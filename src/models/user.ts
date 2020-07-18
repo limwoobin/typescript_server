@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 import UserTypes from './types/UserTypes';
-import Util from '../core/util/util';
-const connection = mongoose.createConnection(new Util().dbConnect());
+
+const connection = mongoose.createConnection('mongodb://127.0.0.1:27017/drogbalog');
 
 autoIncrement.initialize(connection);
 
@@ -13,7 +13,7 @@ const User = new mongoose.Schema({
     salt            : {type: String},
     userName        : {type: String},
     birthday        : {type: Date},
-    createdAt       : {type: Date , default: Date.now}
+createdAt       : {type: Date , default: Date.now}
 });
 
 User.plugin(autoIncrement.plugin , {

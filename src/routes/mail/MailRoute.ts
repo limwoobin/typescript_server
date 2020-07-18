@@ -16,7 +16,7 @@ router.get('/password/find/:toEmail' , async (req: express.Request , res: expres
         logger.info('sendMail:' + sendMail);
     } catch (err) {
         return res.json(new ResponseException(err.message)); 
-    }
+}
 
     return res.json(result);
 })

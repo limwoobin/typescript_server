@@ -5,7 +5,7 @@ import logger from '../../core/config/winston';
 import User from '../../models/user';
 import Util from '../../core/util/util';
 import { UserModel } from '../../core/model/UserModel';
-const config = require('../../config/config.json');
+const config = require('../../core/config/config.json');
 
 const util = new Util();
 

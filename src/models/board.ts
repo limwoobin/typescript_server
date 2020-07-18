@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 import BoardTypes from './types/BoardTypes';
-import Util from '../core/util/util';
-const connection = mongoose.createConnection(new Util().dbConnect());
+const connection = mongoose.createConnection('mongodb://127.0.0.1:27017/drogbalog');
 
 autoIncrement.initialize(connection);
 
