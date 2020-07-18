@@ -15,7 +15,9 @@
         "strictPropertyInitialization": false,
         "experimentalDecorators": true,
         "lib": [
-            "ES2015"
+            "ES2015",
+            "ES2016",
+            "ES2017"
         ]
     },
     "include": [
