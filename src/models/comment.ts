@@ -9,6 +9,7 @@ autoIncrement.initialize(connection);
 const Comment = new mongoose.Schema({
     commentId       : {type: Number},
     board           : {type: mongoose.Schema.Types.ObjectId, ref: 'board' , required: true},
+    post           : {type: mongoose.Schema.Types.ObjectId, ref: 'post' , required: true},
     userEmail       : {type: String, required: true},
     content         : {type: String, required: true},
     image           : {type: String},

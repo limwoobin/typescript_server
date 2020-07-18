@@ -1,7 +1,7 @@
 import Board from '../../models/board';
 import Comment from '../../models/comment';
 import { CommentModel } from '../../core/model/CommentModel';
-const ChildComment = require('../../models/childComment');
+import ChildComment from '../../models/childComment';
 
 export default class CommentService {
 
