@@ -1,17 +1,22 @@
-import { EntityRepository , Repository } from 'typeorm';
 import Category from '../../models/category';
-import CategoryTypes from '../../models/types/CategoryTypes';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
+import {Document , Model} from 'mongoose';
+import CategoryTypes from '../../models/types/CategoryTypes';
+import { Inject } from 'typedi';
 
-@EntityRepository(Category)
-export class CategoryRepository extends Repository<CategoryTypes> {
+export class CategoryRepository {
 
-    async find() {
-        return Category.find();
+    constructor(@Inject('categoryModel') private categoryModel: Model<CategoryTypes & Document>)
+    {
+        this.categoryModel = Category;
     }
 
-    async findByType(type: CategoryTypeCode) {
-        return Category.find()
+    public async find() {
+        return await this.categoryModel.find();
+    }
+
+    public async findByType(type: CategoryTypeCode) {
+        return await Category.find()
                         .where('type').equals(type);
     }
 }
