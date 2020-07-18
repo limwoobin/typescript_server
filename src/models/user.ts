@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 import UserTypes from './types/UserTypes';
-const config = require('../config/config');
-const connection = mongoose.createConnection(config.dbInfo);
+import Util from '../core/util/util';
+const connection = mongoose.createConnection(new Util().dbConnect());
 
 autoIncrement.initialize(connection);
 

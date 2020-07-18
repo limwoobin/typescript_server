@@ -3,7 +3,8 @@ import { Request } from 'express-serve-static-core';
 import { Response , ResponseException} from '../response/ResponseType';
 import Board from '../../models/board';
 import crypto from 'crypto';
-const Post = require('../../models/post');
+import Post from '../../models/post';
+const config = require('../config/config.json');
 
 const result = new Response<'success'>();
 
@@ -47,6 +48,10 @@ export default class Util {
     async getRandomString() {
         const buf = await crypto.randomBytes(15);
         return buf.toString('base64');
+    }
+
+    dbConnect() {
+        return `mongodb://${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.dbs}`;
     }
 }
 

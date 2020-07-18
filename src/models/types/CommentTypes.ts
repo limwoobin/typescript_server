@@ -1,6 +1,7 @@
 export default interface CommentTypes {
-    commentId: string,
+    commentId: number,
     board: string,
+    post: string,
     userEmail: string,
     content: string,
     childComments: [],
