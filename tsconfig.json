@@ -13,6 +13,7 @@
         "strict": true,
         "watch": true,
         "strictPropertyInitialization": false,
+        "experimentalDecorators": true,
         "lib": [
             "ES2015"
         ]
