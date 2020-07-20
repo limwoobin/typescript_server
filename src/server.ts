@@ -1,11 +1,10 @@
 import 'reflect-metadata';
 import express from 'express';
 const app = express();
-import history from 'connect-history-api-fallback';
 import router from './routes/router';
 import settings from './routes/settings';
 import logger from './core/config/winston';
-const config = require('./core/config/config.json');
+import config from './core/config';
 import session from 'express-session';
 // import redis from 'redis';
 // import connectRedis from 'connect-redis';
@@ -42,8 +41,6 @@ app.all('/*' , (req: express.Request , res: express.Response , next: express.Nex
 });
 
 app.use(settings);
-// app.use(history());
-// app.use('/' , express.static(__dirname + "/../../typescript_web/build"));
 app.get('/' , (req: express.Request , res: express.Response) => {
     return res.json('drogbalog api server')
 });
@@ -54,7 +51,18 @@ app.use((err: express.ErrorRequestHandler , req: express.Request , res: express.
     return res.status(500);
 });
 
-const port: (string | number) = process.env.PORT || 4000;
-app.listen(port , () => {
-    logger.info(`Listening on port ${port}`);
-})
+
+async function start() {
+
+    // await require('./core/loaders').default({ expressApp: app });
+
+    app.listen(config.port , () => {
+        logger.info(`
+          ################################################
+          🛡️  Server listening on port: ${config.port} 🛡️ 
+          ################################################
+        `);
+    });   
+}
+
+start();

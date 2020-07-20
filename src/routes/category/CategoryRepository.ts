@@ -11,7 +11,6 @@ export class CategoryRepository {
     }
 
     public async find() {
-        console.log('sgojsgps');
         return await this.categoryModel.find();
     }
 
