@@ -6,8 +6,7 @@ import { Inject } from 'typedi';
 
 export class CategoryRepository {
 
-    constructor(@Inject('categoryModel') private categoryModel: Model<CategoryTypes & Document>)
-    {
+    constructor (private categoryModel: Model<CategoryTypes & Document>) {
         this.categoryModel = Category;
     }
 
@@ -16,7 +15,7 @@ export class CategoryRepository {
     }
 
     public async findByType(type: CategoryTypeCode) {
-        return await Category.find()
+        return await this.categoryModel.find()
                         .where('type').equals(type);
     }
 }
