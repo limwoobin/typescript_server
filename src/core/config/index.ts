@@ -2,12 +2,6 @@ import dotenv from 'dotenv';
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-// const envFount = dotenv.config();
-// if (envFount.error) {
-//     // This error should crash whole process
-//     throw new Error("⚠Couldn't find .env file  ⚠️");
-// }
-
 export default {
    /**
    * Your favorite port
@@ -17,7 +11,9 @@ export default {
   /**
    * That long string from mlab
    */
-  databaseURL: process.env.MONGODB_URI,
+  databaseURL: process.env.MONGODB_URI || '127.0.0.1',
+  databasePort: process.env.MONGODB_PORT || 27017,
+  dbs: "drogbalog",
 
   /**
    * Your secret sauce
@@ -30,4 +26,6 @@ export default {
   logs: {
     level: process.env.LOG_LEVEL || 'info',
   },
+
+  prefix: '/dr'
 }
