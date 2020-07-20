@@ -6,17 +6,17 @@ import { Inject } from 'typedi';
 
 export class CategoryRepository {
 
-    constructor(@Inject('categoryModel') private categoryModel: Model<CategoryTypes & Document>)
-    {
+    constructor (private categoryModel: Model<CategoryTypes & Document>) {
         this.categoryModel = Category;
     }
 
     public async find() {
+        console.log('sgojsgps');
         return await this.categoryModel.find();
     }
 
     public async findByType(type: CategoryTypeCode) {
-        return await Category.find()
+        return await this.categoryModel.find()
                         .where('type').equals(type);
     }
 }

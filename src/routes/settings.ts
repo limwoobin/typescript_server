@@ -6,6 +6,7 @@ import dbConnect from '../core/config/MongodbConfig';
 const app = express();
 const router = express.Router();
 
+
 app.use(bodyParser.json);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
