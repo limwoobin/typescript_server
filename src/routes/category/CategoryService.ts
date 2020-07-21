@@ -1,7 +1,6 @@
 import { Service, Inject } from 'typedi';
-import { CategoryRepository } from './CategoryRepository';
+import CategoryRepository from './CategoryRepository';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
-import logger from '../../core/config/winston';
 
 @Service()
 export default class CategoryService {
