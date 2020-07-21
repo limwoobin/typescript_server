@@ -14,7 +14,7 @@ router.get('/list' , async (req: express.Request , res: express.Response) => {
 
     const result = new Response<CategoryModel[]>();
     const categoryService = Container.get(CategoryService);
-    
+
     try {
         const categories: CategoryModel[] | any = await categoryService.getCategories(type);
         result.data = categories;

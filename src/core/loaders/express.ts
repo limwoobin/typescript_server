@@ -57,9 +57,8 @@ export default ({ app } : { app: express.Application }) => {
     app.use((err: any, req: express.Request, res: express.Response , next: express.NextFunction) => {
         res.status(err.status || 500);
         res.json({
-            errors: {
+            code: err.status,
             message: err.message,
-            },
         });
     });
 

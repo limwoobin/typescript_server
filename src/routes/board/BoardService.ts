@@ -1,11 +1,20 @@
 import Board from '../../models/board';
+import { Service , Inject } from 'typedi';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 import { BoardModel } from '../../core/model/BoardModel';
+import BoardRepository from './BoardRepository';
+import logger from '../../core/config/winston';
 
+@Service()
 export default class BoardService {
+    constructor(
+        private boardRepository: BoardRepository,
+        @Inject('logger') private logger: any
+    ) {}
 
     async getBoardList(boardType: CategoryTypeCode) {
-        return Board.find({boardType: boardType});
+        logger.info('boardType:' + boardType);
+        return this.boardRepository.getBoardList(boardType);
     };
 
     async getBoard(_id: string) {
