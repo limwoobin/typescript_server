@@ -1,10 +1,9 @@
 import 'reflect-metadata';
 import express from 'express';
-const app = express();
 import router from './routes/router';
 import logger from './core/config/winston';
 import config from './core/config';
-
+const app = express();
 
 async function start() {
     app.use(config.prefix , router);

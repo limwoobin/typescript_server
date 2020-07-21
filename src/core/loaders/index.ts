@@ -5,9 +5,11 @@ import mongooseLoader from './mongoose';
 import logger from '../config/winston';
 
 export default async ({ expressApp } : { expressApp: any }) => {
-    const mongoConnection = await mongooseLoader();
+    await mongooseLoader();
     logger.info('✌️ DB loaded and connected!');
 
     await expressLoader({ app: expressApp });
     logger.info(' Express Loaded');
+
+    await dependencyInjectorLoader();
 }
