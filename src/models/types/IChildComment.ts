@@ -1,10 +1,9 @@
-export default interface CommentTypes {
-    commentId: number,
+export default interface IChildComment {
+    childCommentId: string,
     board: string,
-    post: string,
+    commentId: number,
     userEmail: string,
     content: string,
-    childComments: [],
     createdAt: Date,
     updatedAt: Date
 }

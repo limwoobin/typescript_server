@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import CategoryTypes from './types/CategoryTypes';
+import ICategory from './types/ICategory';
 import { CategoryTypeCode } from '../core/code/CategoryTypeCode';
 
 const Category = new mongoose.Schema({
@@ -9,4 +9,4 @@ const Category = new mongoose.Schema({
     routerName : {type: CategoryTypeCode},
 });
 
-export default mongoose.model<CategoryTypes & mongoose.Document>('Category' , Category);
+export default mongoose.model<ICategory & mongoose.Document>('Category' , Category);

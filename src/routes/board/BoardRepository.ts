@@ -1,12 +1,12 @@
 import Board from '../../models/board';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 import {Document , Model} from 'mongoose';
-import BoardTypes from '../../models/types/BoardTypes';
+import IBoard from '../../models/types/IBoard';
 import { BoardModel } from '../../core/model/BoardModel';
 
 export default class BoardRepository {
 
-    constructor(private boardModel: Model<BoardTypes & Document>) {
+    constructor(private boardModel: Model<IBoard & Document>) {
         this.boardModel = Board;
     }
 

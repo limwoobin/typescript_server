@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import PostTypes from './types/PostTypes';
+import IPost from './types/IPost';
 import { PostTypeCode } from '../core/code/PostTypeCode';
 
 const connection = mongoose.createConnection('mongodb://127.0.0.1:27017/drogbalog');
@@ -27,4 +27,4 @@ Post.plugin(autoIncrement.plugin , {
 })
 
 
-export default mongoose.model<PostTypes & mongoose.Document>('Post' , Post);
+export default mongoose.model<IPost & mongoose.Document>('Post' , Post);

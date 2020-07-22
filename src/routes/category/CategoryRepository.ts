@@ -1,13 +1,13 @@
 import Category from '../../models/category';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 import { Document , Model } from 'mongoose';
-import CategoryTypes from '../../models/types/CategoryTypes';
+import ICategory from '../../models/types/ICategory';
 import { Inject } from 'typedi';
 import { CategoryModel } from '../../core/model/CategoryModel';
 
 export default class CategoryRepository {
 
-    constructor (private categoryModel: Model<CategoryTypes & Document>) {
+    constructor (private categoryModel: Model<ICategory & Document>) {
         this.categoryModel = Category;
     }
 

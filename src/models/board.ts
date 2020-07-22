@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import BoardTypes from './types/BoardTypes';
+import IBoard from './types/IBoard';
 const connection = mongoose.createConnection('mongodb://127.0.0.1:27017/drogbalog');
 
 autoIncrement.initialize(connection);
@@ -25,4 +25,4 @@ Board.plugin(autoIncrement.plugin , {
     increment   : 1
 });
 
-export default mongoose.model<BoardTypes & mongoose.Document>('Board' , Board);
+export default mongoose.model<IBoard & mongoose.Document>('Board' , Board);
