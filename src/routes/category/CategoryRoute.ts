@@ -7,7 +7,6 @@ import { CategoryModel } from '../../core/model/CategoryModel';
 import logger from '../../core/config/winston';
 import { Container } from 'typedi';
 
-
 router.get('/list' , async (req: express.Request , res: express.Response) => {
     const type: CategoryTypeCode = req.query.type as any;
     logger.info('type:' + type);
