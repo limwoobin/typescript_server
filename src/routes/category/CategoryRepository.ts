@@ -3,6 +3,7 @@ import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 import { Document , Model } from 'mongoose';
 import CategoryTypes from '../../models/types/CategoryTypes';
 import { Inject } from 'typedi';
+import { CategoryModel } from '../../core/model/CategoryModel';
 
 export default class CategoryRepository {
 
@@ -10,11 +11,11 @@ export default class CategoryRepository {
         this.categoryModel = Category;
     }
 
-    public async find() {
+    public async find() : Promise<CategoryModel[]> {
         return await this.categoryModel.find();
     }
 
-    public async findByType(type: CategoryTypeCode) {
+    public async findByType(type: CategoryTypeCode) : Promise<CategoryModel[]> {
         return await this.categoryModel.find()
                         .where('type').equals(type);
     }

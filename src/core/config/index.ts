@@ -14,6 +14,7 @@ export default {
   databaseURL: process.env.MONGODB_URI || '127.0.0.1',
   databasePort: process.env.MONGODB_PORT || 27017,
   dbs: "drogbalog",
+  // dbs: "mongodb_tutorial",
 
   /**
    * Your secret sauce
