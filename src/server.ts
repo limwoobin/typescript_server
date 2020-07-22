@@ -10,6 +10,7 @@ async function start() {
     await require('./core/loaders').default({ expressApp: app });
 
     app.listen(config.port , () => {
+      console.log(config.port);
         logger.info(`
           ################################################
           🛡️  Server listening on port: ${config.port} 🛡️ 

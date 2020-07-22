@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import ChildCommentTypes from './types/ChildCommentTypes';
+import IChildComment from './interface/IChildComment';
 
 const connection = mongoose.createConnection('mongodb://127.0.0.1:27017/drogbalog');
 
@@ -24,4 +24,4 @@ ChildComment.plugin(autoIncrement.plugin , {
     increment:     1   
 });
 
-export default mongoose.model<ChildCommentTypes & mongoose.Document>('ChildComment' , ChildComment);
+export default mongoose.model<IChildComment & mongoose.Document>('ChildComment' , ChildComment);

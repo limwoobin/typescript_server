@@ -23,8 +23,29 @@ class Acounting extends Department {
     }
 }
 
-// let department : Department;
 let department = new Acounting();
 department.printName();
 department.printMetting();
 department.generated();
+
+
+
+
+
+
+let myAdd = function(x: number , y: number): number {
+    return x + y;
+}
+
+let myAdd2: (baseValue: number , incremnet: number) => number  = function(x , y) {
+     return x + y;
+ }
+
+let myAdd3: (baseValue: number , incremnet: number) => number  = (x , y) => {
+    return x + y;
+}
+
+console.log(myAdd(3 , 5));
+console.log(myAdd2(5 , 7));
+console.log(myAdd3(5 , 10));
+

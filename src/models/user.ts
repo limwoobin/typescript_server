@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import UserTypes from './types/UserTypes';
+import IUser from './interface/IUser';
 
 const connection = mongoose.createConnection('mongodb://127.0.0.1:27017/drogbalog');
 
@@ -23,4 +23,4 @@ User.plugin(autoIncrement.plugin , {
     increment   : 1
 });
 
-export default mongoose.model<UserTypes & mongoose.Document>('User' , User);
+export default mongoose.model<IUser & mongoose.Document>('User' , User);

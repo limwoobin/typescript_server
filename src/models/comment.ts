@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import CommentTypes from './types/CommentTypes';
+import IComment from './interface/IComment';
 
 const connection = mongoose.createConnection('mongodb://127.0.0.1:27017/drogbalog');
 
@@ -25,4 +25,4 @@ Comment.plugin(autoIncrement.plugin , {
     increment: 1
 });
 
-export default mongoose.model<CommentTypes & mongoose.Document>('Comment' , Comment);
+export default mongoose.model<IComment & mongoose.Document>('Comment' , Comment);
