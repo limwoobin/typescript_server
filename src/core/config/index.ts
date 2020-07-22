@@ -1,12 +1,19 @@
+import path from 'path';
 import dotenv from 'dotenv';
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
+
+if (process.env.NODE_ENV === 'prod') {
+  dotenv.config({path: path.join(__dirname, '../../../.env.prod')});
+} else {
+  dotenv.config({path: path.join(__dirname, '../../../.env.dev')});
+}
 
 export default {
    /**
    * Your favorite port
    */
-  port: process.env.PORT || 4000,
+  port: process.env.PORT,
 
   /**
    * That long string from mlab

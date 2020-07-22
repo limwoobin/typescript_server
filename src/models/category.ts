@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import ICategory from './types/ICategory';
+import ICategory from './interface/ICategory';
 import { CategoryTypeCode } from '../core/code/CategoryTypeCode';
 
 const Category = new mongoose.Schema({

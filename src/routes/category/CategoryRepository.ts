@@ -1,7 +1,7 @@
 import Category from '../../models/category';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 import { Document , Model } from 'mongoose';
-import ICategory from '../../models/types/ICategory';
+import ICategory from '../../models/interface/ICategory';
 import { Inject } from 'typedi';
 import { CategoryModel } from '../../core/model/CategoryModel';
 

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import IPost from './types/IPost';
+import IPost from './interface/IPost';
 import { PostTypeCode } from '../core/code/PostTypeCode';
 
 const connection = mongoose.createConnection('mongodb://127.0.0.1:27017/drogbalog');

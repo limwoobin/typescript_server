@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import IBoard from './types/IBoard';
+import IBoard from './interface/IBoard';
 const connection = mongoose.createConnection('mongodb://127.0.0.1:27017/drogbalog');
 
 autoIncrement.initialize(connection);

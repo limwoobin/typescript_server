@@ -1,7 +1,7 @@
 import Board from '../../models/board';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 import {Document , Model} from 'mongoose';
-import IBoard from '../../models/types/IBoard';
+import IBoard from '../../models/interface/IBoard';
 import { BoardModel } from '../../core/model/BoardModel';
 
 export default class BoardRepository {

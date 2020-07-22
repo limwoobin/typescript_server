@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import IUser from './types/IUser';
+import IUser from './interface/IUser';
 
 const connection = mongoose.createConnection('mongodb://127.0.0.1:27017/drogbalog');
 
