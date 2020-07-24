@@ -12,6 +12,8 @@ typescript + express
       | code : enum 타입의 코드 정의모음
       | config : 설정파일
       | middleware : 미들웨어
+      | decorators : 데코레이터
+      | loaders : 서버 세팅(ex. body-parser , routing , exception , dbConnection... )
       | model : 객체 response 객체모델 
       | response : http 응답객체 
       | util : 유틸성 공통함수 
