@@ -13,7 +13,7 @@ export default {
    /**
    * Your favorite port
    */
-  port: process.env.PORT,
+  port: process.env.PORT || 4000,
 
   /**
    * That long string from mlab

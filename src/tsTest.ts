@@ -49,3 +49,8 @@ console.log(myAdd(3 , 5));
 console.log(myAdd2(5 , 7));
 console.log(myAdd3(5 , 10));
 
+let tuple: [string, number];
+tuple = ['b', 2];
+tuple.push(3);
+tuple.push('c');
+console.log(tuple);
