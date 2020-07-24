@@ -6,7 +6,6 @@ typescript + express
 
 <pre>
 <code>
-| env : environment 파일
 | src
   | core : 전체적인 설정파일 및 공통모듈 정의
       | code : enum 타입의 코드 정의모음
