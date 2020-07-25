@@ -6,8 +6,6 @@ import crypto from 'crypto';
 import Post from '../../models/post';
 const config = require('../config/config.json');
 
-const result = new Response<'success'>();
-
 export default class Util {
 
     checkBoardId(req: express.Request , res: express.Response , next: express.NextFunction) {

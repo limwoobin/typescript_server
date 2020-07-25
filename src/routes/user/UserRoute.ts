@@ -10,8 +10,8 @@ import { UserModel } from '../../core/model/UserModel';
 import crypto from 'crypto';
 import { Response , ResponseException } from '../../core/response/ResponseType';
 import { Request } from 'express-serve-static-core';
+import { Container } from 'typedi';
 
-const userService = new UserService();
 const util = new Util();
 
 passport.serializeUser((user: UserModel , done) => {
@@ -43,6 +43,7 @@ passport.use('local' , new LocalStrategy.Strategy({
 
 router.post('/login' , async (req: SessionRequest | any , res: express.Response , next: express.NextFunction) => {
     const result = new Response<string>();
+
     passport.authenticate('local' , (err: Error , user: UserModel , info: any) => {
         if (err) {
             return res.json(new ResponseException(err.message));
@@ -64,6 +65,7 @@ router.post('/login' , async (req: SessionRequest | any , res: express.Response 
 
 router.get('/users' , async (req: express.Request , res: express.Response) => {
     const result = new Response<UserModel[] | any>();
+    const userService = Container.get(UserService);
 
     try {
         const getUsers = await userService.getUsers();
@@ -78,6 +80,8 @@ router.get('/users' , async (req: express.Request , res: express.Response) => {
 
 router.get('/overlap/check/:userEmail' , async (req: express.Request , res: express.Response) => {
     const result = new Response<UserModel | any>();
+    const userService = Container.get(UserService);
+
     logger.info('req.params:' + req.params.userEmail);
     try {
         const user = await userService.findUser(req.params.userEmail);
@@ -92,6 +96,8 @@ router.get('/overlap/check/:userEmail' , async (req: express.Request , res: expr
 
 router.post('/insert' , async (req: express.Request , res: express.Response) => {
     const result = new Response<any>();
+    const userService = Container.get(UserService);
+
     logger.info('req.body:' + req.body);
 
     let userModel = new User(req.body);
@@ -112,7 +118,8 @@ router.post('/logout' , async (req: express.Request , res: express.Response) => 
 
 router.get('/update/info' , util.sessionCheck , async (req: SessionRequest | any , res: express.Response) => {
     const result = new Response<any>();
-
+    const userService = Container.get(UserService);
+    
     try {
         let userModel = new User(req.body);
         const updateUser = await userService.updateUser(userModel , req.session.userEmail);
