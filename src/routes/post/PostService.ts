@@ -1,32 +1,29 @@
 import Post from '../../models/post';
 import { PostTypeCode } from '../../core/code/PostTypeCode';
 import { PostModel } from '../../core/model/PostModel';
+import { Service , Inject } from 'typedi';
+import PostRepository from './PostRepository';
 
+@Service()
 export default class PostService {
-    async getPosts(postType: PostTypeCode) {
-        return await Post.find({postType: postType});
+    constructor(
+        private postRepository: PostRepository,
+        @Inject('logger') private logger: any,
+    ) {}
+
+    async getPosts(postType: PostTypeCode) : Promise<PostModel[]> {
+        return await this.postRepository.getPosts(postType);
     }
 
-    async getPost(_id: string) {
-        const postData: PostModel | any = await Post.findOne({_id: _id});
-        postData.views++;
-        postData.save();
-        return postData;
+    async getPost(_id: string) : Promise<PostModel> {
+        return this.postRepository.getPost(_id);
     }
 
-    async getRecentPosts() {
-        return await Post.find()
-                         .sort('-createdAt')
-                         .limit(5)
-                         .select('_id title');
+    async getRecentPosts() : Promise<PostModel[]> {
+        return await this.postRepository.getRecentPost();
     }
 
-    async writePost(postData: PostModel) {
-        let post = new Post();
-        post.userEmail = postData.userEmail;
-        post.postType = postData.postType;
-        post.title = postData.title;
-        post.content = postData.content;
-        return await post.save();
+    async writePost(postData: PostModel) : Promise<void> {
+        await this.postRepository.save(postData);
     }
 }

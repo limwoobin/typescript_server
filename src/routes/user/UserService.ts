@@ -34,7 +34,7 @@ export default class UserService {
         })
     };
 
-    async updateUser(userModel: UserModel , userEmail: string) {
+    public async updateUser(userModel: UserModel , userEmail: string) {
         if (userModel.userEmail !== userEmail) {
             throw new Error('400');   
         }
