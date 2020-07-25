@@ -1,6 +1,6 @@
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 
-export default interface CategoryTypes {
+export default interface ICategory {
     name: string;
     type: string;
     code: string;

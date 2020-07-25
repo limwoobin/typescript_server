@@ -1,22 +1,22 @@
 import Category from '../../models/category';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
-import {Document , Model} from 'mongoose';
-import CategoryTypes from '../../models/types/CategoryTypes';
+import { Document , Model } from 'mongoose';
+import ICategory from '../../models/interface/ICategory';
 import { Inject } from 'typedi';
+import { CategoryModel } from '../../core/model/CategoryModel';
 
-export class CategoryRepository {
+export default class CategoryRepository {
 
-    constructor(@Inject('categoryModel') private categoryModel: Model<CategoryTypes & Document>)
-    {
+    constructor (private categoryModel: Model<ICategory & Document>) {
         this.categoryModel = Category;
     }
 
-    public async find() {
+    public async find() : Promise<CategoryModel[]> {
         return await this.categoryModel.find();
     }
 
-    public async findByType(type: CategoryTypeCode) {
-        return await Category.find()
+    public async findByType(type: CategoryTypeCode) : Promise<CategoryModel[]> {
+        return await this.categoryModel.find()
                         .where('type').equals(type);
     }
 }

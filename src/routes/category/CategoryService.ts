@@ -1,20 +1,19 @@
 import { Service, Inject } from 'typedi';
-import { CategoryRepository } from './CategoryRepository';
+import CategoryRepository from './CategoryRepository';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
-import { Container } from 'typedi';
-
-const categoryRepository = Container.get(CategoryRepository);
+import { CategoryModel } from '../../core/model/CategoryModel';
 
 @Service()
 export default class CategoryService {
     constructor(
-        // @Inject('categoryRepository') private categoryRepository: CategoryRepository
+        private categoryRepository: CategoryRepository,
+        @Inject('logger') private logger: any,
     ) {}
 
-    public async getCategories(type: CategoryTypeCode | undefined) {
+    public async getCategories(type: CategoryTypeCode | undefined) : Promise<CategoryModel[]>{
         if (type) {
-            return categoryRepository.findByType(type);
+            return this.categoryRepository.findByType(type);
         }
-        return categoryRepository.find();
+        return this.categoryRepository.find();
     }
 }

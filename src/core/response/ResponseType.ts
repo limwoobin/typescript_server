@@ -1,8 +1,5 @@
 import { HttpStatusCode , HttpStatusMessage } from '../code/HttpStatusCode';
 
-type ResponseConfig<T> = { code: HttpStatusCode, message: HttpStatusMessage; data: T; error?: any };
-type ResponseError<T> = { code: HttpStatusCode, message: HttpStatusMessage; data?: any; error: T};
-
 export class Response<T> {
     private code: HttpStatusCode = HttpStatusCode.OK;
     private message: HttpStatusMessage = HttpStatusMessage.OK;

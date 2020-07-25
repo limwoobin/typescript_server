@@ -7,14 +7,13 @@ import { CategoryModel } from '../../core/model/CategoryModel';
 import logger from '../../core/config/winston';
 import { Container } from 'typedi';
 
-
 router.get('/list' , async (req: express.Request , res: express.Response) => {
     const type: CategoryTypeCode = req.query.type as any;
     logger.info('type:' + type);
 
     const result = new Response<CategoryModel[]>();
     const categoryService = Container.get(CategoryService);
-    
+
     try {
         const categories: CategoryModel[] | any = await categoryService.getCategories(type);
         result.data = categories;
@@ -28,34 +27,3 @@ router.get('/list' , async (req: express.Request , res: express.Response) => {
 });
 
 export default router;
-
-
-
-
-// @JsonController('/category')
-// export default class CategoryRoute {
-//     constructor(
-//         private categoryService: CategoryService
-//     ){}
-
-//     @HttpCode(200)
-//     @Get('/list')
-//     public async getCategories(req: express.Request , res: express.Response) {
-//         const type: CategoryTypeCode = req.query.type as any;
-//         logger.info('type:' + type);
-    
-//         const result = new Response<CategoryModel[]>();
-
-//         try {
-//             const categories: CategoryModel[] | any = await this.categoryService.getCategories(type);
-//             result.data = categories;
-//         } catch (err) {
-//             logger.info("message:" + err.message);
-//             return res.json(new ResponseException(err.message));
-//         }
-    
-//         return res.json(result);
-//     }
-// };
-
-

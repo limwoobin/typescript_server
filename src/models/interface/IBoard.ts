@@ -1,14 +1,14 @@
-import { PostTypeCode } from '../../core/code/PostTypeCode';
+import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 import { CommentModel } from '../../core/model/CommentModel';
 
-export default interface PostTypes {
-    postId: number,
+export default interface IBoard {
+    boardId: number,
     userEmail: string,
-    postType: PostTypeCode,
+    boardType: CategoryTypeCode,
     title: string,
-    content: string,
+    content: any,
     comments: CommentModel[],
     views: number,
     createdAt: Date,
     updatedAt: Date
-}
+};

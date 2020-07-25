@@ -6,13 +6,15 @@ import { Response , ResponseException } from '../../core/response/ResponseType';
 import { BoardModel } from '../../core/model/BoardModel';
 import { CategoryTypeCode } from '../../core/code/CategoryTypeCode';
 import logger from '../../core/config/winston';
+import { Container } from 'typedi';
 
 const util = new Util();
-const boardService = new BoardService();
 
 router.get('/list/:type' , async (req: express.Request , res: express.Response) => {
     const result = new Response<BoardModel[]>();
     const boardType: CategoryTypeCode = req.params.type as any;
+
+    const boardService = Container.get(BoardService);
 
     try {
         const boards: BoardModel[] = await boardService.getBoardList(boardType);
@@ -29,6 +31,8 @@ router.get('/view/:id' , util.checkBoardId , async (req: express.Request , res: 
     const result = new Response<BoardModel>();
     const _id: string = req.params.id;
 
+    const boardService = Container.get(BoardService);
+
     try {
         const board: BoardModel = await boardService.getBoard(_id);
         result.data = board;
@@ -42,7 +46,8 @@ router.get('/view/:id' , util.checkBoardId , async (req: express.Request , res: 
 
 router.post('/write' , async (req: express.Request , res: express.Response ) => {
     const result = new Response<''>();
-    
+    const boardService = Container.get(BoardService);
+
     try {
         const writeBoard: void | any = await boardService.writeBoard(req.body);
         console.log('writeBoard:' + writeBoard);
@@ -55,6 +60,7 @@ router.post('/write' , async (req: express.Request , res: express.Response ) => 
 
 router.post('/update' , async (req: express.Request , res: express.Response) => {
     const result = new Response<''>();
+    const boardService = Container.get(BoardService);
 
     try {
         const updateBoard: void | any = await boardService.updateBoard(req.body);
@@ -69,6 +75,7 @@ router.post('/update' , async (req: express.Request , res: express.Response) => 
 
 router.delete('/delete' , async (req: express.Request , res: express.Response) => {
     const result = new Response<''>();
+    const boardService = Container.get(BoardService);
 
     try {
         const deleteBoard: void = await boardService.deleteBoard(req.body);
@@ -82,6 +89,7 @@ router.delete('/delete' , async (req: express.Request , res: express.Response) =
 
 router.get('/recent/notice' , async (req: express.Request , res: express.Response) => {
     const result = new Response<BoardModel[]>();
+    const boardService = Container.get(BoardService);
 
     try {
         const recentNotice: BoardModel[] = await boardService.getRecentNotice();
